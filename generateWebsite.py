@@ -3,10 +3,12 @@ import requests
 import boto3
 import time
 import zipfile
+from flask import jsonify
+import os
 # Set up the OpenAI API credentials
-openai.api_key = "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"
-Access_key = 'AKIAZ2ATZLIJKTM2UBAL'
-Secret_access_key = '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'
+openai.api_key = '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'
+Access_key = 'AKIAZ2ATZLIJIMU3LGAH'
+Secret_access_key = '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'
 Bucket_name = 'lablab-r589abgqi3sghbtjf6yb4nkig1azruse1a-s3alias'
 # A function to open a file
 def open_file(filepath):
@@ -68,12 +70,21 @@ def generate_HTML_and_CSS(command):
     aws_secret_access_key=Secret_access_key)
     bucket_name = Bucket_name
     # Send Zip file
-    with open(f"{file_name}.zip", "rb") as file:
-        s3.put_object(Bucket=Bucket_name, Key=file_name, Body=file)
-        file.close()
+    # Upload the zip file to the S3 bucket
+    file_path = f"/home/runner/openai-flask/{file_name}"
+    s3.upload_file(file_path, bucket_name, file_name)
 
     # Retrieve the URL
-    url = s3.generate_presigned_url('get_object', Params={'Bucket': bucket_name, 'Key': file_name})
+
+    # url = f"https://{bucket_name}.s3.amazonaws.com/{file_name}"
+    url = s3.generate_presigned_url(
+    'get_object',
+    Params={
+        'Bucket': bucket_name,
+        'Key': file_name,
+    },
+    ExpiresIn=3600,  # URL expires after 1 hour
+)
 
     # Notify
     print("HTML and CSS files have been sent to AWS bucket")

@@ -9,6 +9,7 @@ python = "^3.10"
 Flask = "^2.2.3"
 openai = "^0.27.0"
 boto3 = "^1.26.83"
+Flask-Cors = "^3.0.10"
 
 [tool.poetry.dev-dependencies]
 
