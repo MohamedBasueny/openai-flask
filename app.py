@@ -11,7 +11,7 @@ def hello_world():
   return "hello_DeepDream"
 
 # set up your OpenAI API key
-openai.api_key = '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'
+openai.api_key = 
 
 @app.route('/generate_logo', methods=['POST','OPTIONS'])
 @cross_origin()
