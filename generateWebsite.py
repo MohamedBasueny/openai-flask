@@ -6,9 +6,9 @@ import zipfile
 from flask import jsonify
 import os
 # Set up the OpenAI API credentials
-openai.api_key = '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'
-Access_key = 'AKIAZ2ATZLIJIMU3LGAH'
-Secret_access_key = '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'
+openai.api_key = 
+Access_key = 
+Secret_access_key = 
 Bucket_name = 'lablab-r589abgqi3sghbtjf6yb4nkig1azruse1a-s3alias'
 # A function to open a file
 def open_file(filepath):
